@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
-  resources :leads
+  resources :customers do
+    resources :interactions
+  end
+
+  devise_for :users
+  resources :users, only: [:edit, :update]
+
+  get 'permissions/denied' => 'permissions#denied', as: 'permissions_denied'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root to: 'customers#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

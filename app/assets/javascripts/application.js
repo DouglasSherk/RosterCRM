@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require moment
+//= require bootstrap-sortable
 //= require turbolinks
 //= require react
 //= require react_ujs

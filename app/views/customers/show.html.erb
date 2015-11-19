@@ -1,0 +1,72 @@
+<% if notice %>
+  <div class="alert alert-info"><%= notice %></div>
+<% end %>
+
+<h2><%= @customer.name %></h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Contact reminder</th>
+      <th>Next scheduled interaction</th>
+      <th>Quality</th>
+      <th>City, Country</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <td class="<%= status_color(@customer.status) %>"><%= @customer.status.to_s.humanize %></td>
+    <td class="<%= interaction_color(@customer.next_contact, past: true) %>"><%= @customer.next_contact %></td>
+    <td class="<%= interaction_color(@customer.next_interaction) %>"><%= @customer.next_interaction %></td>
+    <td style="color: white; background: <%= quality_color(@customer.quality) %>"><%= @customer.quality %></td>
+    <td><%= @customer.city_country %></td>
+  </tbody>
+</table>
+
+<% if !@customer.description.empty? %>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Description
+        </div>
+        <div class="panel-body">
+          <%= @customer.description %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-primary' %> |
+<%= link_to 'Back', customers_path, class: 'btn btn-default' %>
+
+<hr class="soften" />
+
+<h2>Interactions <%= link_to 'New Interaction', new_customer_interaction_path(@customer), class: 'btn btn-success pull-right' %></h2>
+
+<table class="table sortable">
+  <thead>
+    <tr>
+      <th data-defaultsort="desc">Time</th>
+      <th>Mode</th>
+      <th>Description</th>
+      <th data-defaultsort="disabled"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customer.interactions.each do |interaction| %>
+      <tr>
+        <td class="<%= interaction_color(interaction.time) %>"><%= interaction.time %></td>
+        <td class="<%= status_color(interaction.mode.to_sym) %>"><%= interaction.mode.humanize %></td>
+        <td><%= interaction.description %></td>
+        <td class="text-right">
+          <%= link_to 'Edit', edit_customer_interaction_path(@customer, interaction), class: 'btn btn-primary btn-xs' %>
+          <%= link_to 'Destroy', customer_interaction_path(@customer, interaction), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

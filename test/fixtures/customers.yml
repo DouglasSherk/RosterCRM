@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  next_contact: 2015-11-17 12:39:48
+  quality: 1
+  city_country: MyString
+  description: MyString
+  user_id: 
+
+two:
+  name: MyString
+  next_contact: 2015-11-17 12:39:48
+  quality: 1
+  city_country: MyString
+  description: MyString
+  user_id: 

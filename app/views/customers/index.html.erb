@@ -1,0 +1,41 @@
+<% if notice %>
+  <div class="alert alert-info"><%= notice %></div>
+<% end %>
+
+<h2>Listing Customers <%= link_to 'New Customer', new_customer_path, class: 'btn btn-success pull-right' %></h2>
+
+<hr class="soften" />
+
+<table class="table sortable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Contact reminder</th>
+      <th data-defaultsort="desc">Next scheduled interaction</th>
+      <th>Quality</th>
+      <th>City, Country</th>
+      <th>Description</th>
+      <th data-defaultsort="disabled"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr <%= gray_out_inaccessible(customer) %>>
+        <td><%= link_to customer.name, customer %></td>
+        <td class="<%= status_color(customer.status) %>"><%= customer.status.to_s.humanize %></td>
+        <td class="<%= interaction_color(customer.next_contact, past: true) %>"><%= customer.next_contact %></td>
+        <td class="<%= interaction_color(customer.next_interaction) %>"><%= customer.next_interaction %></td>
+        <td style="color: white; background: <%= quality_color(customer.quality) %>"><%= customer.quality %></td>
+        <td><%= customer.city_country %></td>
+        <td><%= truncate customer.description, length: 30 %></td>
+        <td class="text-right">
+          <%= link_to 'Show', customer, class: 'btn btn-info btn-xs' %>
+          <%= link_to 'Edit', edit_customer_path(customer), class: 'btn btn-primary btn-xs' %>
+          <%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

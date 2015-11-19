@@ -1,4 +1,4 @@
-var Lead = React.createClass({
+var Customer = React.createClass({
   getInitialState: function() {
     return JSON.parse(this.props.presenter);
   },
