@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117044957) do
+ActiveRecord::Schema.define(version: 20151119161020) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(version: 20151117044957) do
     t.datetime "time"
     t.integer  "mode"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "google_calendar_id"
   end
 
   add_index "interactions", ["customer_id"], name: "index_interactions_on_customer_id"
@@ -51,6 +52,10 @@ ActiveRecord::Schema.define(version: 20151117044957) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "city_country"
+    t.string   "token"
+    t.string   "uid"
+    t.string   "provider"
+    t.datetime "last_calendar_fetch"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

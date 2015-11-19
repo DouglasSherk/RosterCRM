@@ -38,6 +38,11 @@ gem 'twitter-bootstrap-rails'
 gem 'momentjs-rails'
 gem 'rails_bootstrap_sortable'
 
+# Google API Integration
+gem 'google-api-client', :require => 'google/api_client'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
 # ReactJS for UI
 gem 'react-rails'
 

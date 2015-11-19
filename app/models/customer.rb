@@ -2,6 +2,8 @@ class Customer < ActiveRecord::Base
   belongs_to :user
   has_many :interactions
 
+  validates :name, presence: true, uniqueness: {scope: :user}
+
   def status
     status = interactions.max_by(&:mode)
     ((status && status.mode) || Interaction.modes.first[0]).to_sym

@@ -24,7 +24,7 @@
   </tbody>
 </table>
 
-<% if !@customer.description.empty? %>
+<% if !@customer.description.nil? && !@customer.description.empty? %>
   <div class="row">
     <div class="col-sm-6">
       <div class="panel panel-default">
