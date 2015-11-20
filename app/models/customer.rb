@@ -32,7 +32,7 @@ class Customer < ActiveRecord::Base
     return nil if !next_interaction.nil?
     last_interaction = interactions.order('time ASC').first
     time = last_interaction && last_interaction.time || DateTime.now.utc
-    return time + 5.days if dbval && dbval < time
+    return time + 5.days
   end
 
   def next_interaction
