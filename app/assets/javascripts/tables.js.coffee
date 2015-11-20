@@ -1,1 +1,1 @@
-$(document).on('page:change', -> $.bootstrapSortable());
+$(document).on 'page:change', -> $.bootstrapSortable()

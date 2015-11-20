@@ -5,21 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :maybe_fetch_calendar
-  before_action :get_location
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to permissions_denied_path, alert: exception.message
   end
 
   private
-    def get_location
-      #lat = request.location.latitude
-      #lon = request.location.longitude
-      #timezone = Timezone::Zone.new(latlon: [lat, lon])
-      #timezone_offset = timezone.offset
-      #puts timezone_offset
-    end
-
     def maybe_fetch_calendar
       return if current_user.nil? ||
         (!current_user.last_calendar_fetch.nil? &&

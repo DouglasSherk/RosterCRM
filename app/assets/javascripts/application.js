@@ -18,5 +18,6 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
+//= require local_time
 //= require components
 //= require_tree .

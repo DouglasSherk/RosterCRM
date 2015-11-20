@@ -44,8 +44,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
 # User timezones
-gem 'timezone'
-gem 'geocoder'
+gem 'local_time'
 
 # ReactJS for UI
 gem 'react-rails'

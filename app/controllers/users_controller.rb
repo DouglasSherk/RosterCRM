@@ -4,13 +4,13 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # PATCH/PUT /users
-  # PATCH/PUT /users
+  # PATCH/PUT /user
+  # PATCH/PUT /user
   def update
     respond_to do |format|
       if @user.update(users_params)
         format.html { redirect_to edit_user_path(@user), notice: 'User was successfully updated.' }
-        format.json { render :edit, status: :ok, location: @user }
+        format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   private
     def users_params
-      params.require(:user).permit(:city_country)
+      params.permit(:city_country)
     end
 
     def set_user

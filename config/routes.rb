@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
-  resources :users, only: [:edit, :update]
+  resource :user, only: [:edit, :update]
 
   get 'permissions/denied' => 'permissions#denied', as: 'permissions_denied'
 
