@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
     user.provider = access_token.provider
     user.uid = access_token.uid
     user.token = access_token.credentials.token
+    user.refresh_token = access_token.credentials.refresh_token
     user.save
     user
   end

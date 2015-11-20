@@ -43,6 +43,10 @@ gem 'google-api-client', :require => 'google/api_client'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
+# User timezones
+gem 'timezone'
+gem 'geocoder'
+
 # ReactJS for UI
 gem 'react-rails'
 

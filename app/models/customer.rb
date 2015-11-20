@@ -1,6 +1,6 @@
 class Customer < ActiveRecord::Base
   belongs_to :user
-  has_many :interactions
+  has_many :interactions, dependent: :destroy
 
   validates :name, presence: true, uniqueness: {scope: :user}
 
