@@ -1,8 +1,6 @@
 module CustomersHelper
   def gray_out_inaccessible(customer)
-    return '' if current_user.city_country.nil? || current_user.city_country.empty? ||
-                 customer.city_country.nil? || customer.city_country.empty?
-    customer.city_country != current_user.city_country ? 'class=inaccessible' : '' 
+    customer.active?(current_user.city_country) ? '' : 'class=inaccessible'
   end
 
   def status_color(status)

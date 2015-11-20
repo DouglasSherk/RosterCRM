@@ -4,6 +4,21 @@ class Customer < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: {scope: :user}
 
+  def self.active(customers, city_country)
+    customers.find_all { |customer| customer.active?(city_country) }
+  end
+
+  def self.inactive(customers, city_country)
+    customers.find_all { |customer| !customer.active?(city_country) }
+  end
+
+  def active?(user_city_country)
+    different_city = !user_city_country.nil? && !user_city_country.empty? &&
+                     !city_country.nil? && !city_country.empty? &&
+                     user_city_country == city_country
+    status != :termination && !different_city
+  end
+
   def status
     status = interactions.max_by(&:mode)
     ((status && status.mode) || Interaction.modes.first[0]).to_sym
