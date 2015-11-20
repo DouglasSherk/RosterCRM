@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120053036) do
+ActiveRecord::Schema.define(version: 20151120105819) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20151120053036) do
     t.string   "provider"
     t.datetime "last_calendar_fetch"
     t.string   "refresh_token"
+    t.string   "timezone"
+    t.datetime "expires_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

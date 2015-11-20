@@ -24,8 +24,18 @@ class ApplicationController < ActionController::Base
 
     def fetch_calendar
       client = Google::APIClient.new
+      client.authorization.client_id = ENV['GOOGLE_CLIENT_ID']
+      client.authorization.client_secret = ENV['GOOGLE_CLIENT_SECRET']
       client.authorization.access_token = current_user.token
+      client.authorization.refresh_token = current_user.refresh_token
+      client.authorization.expires_at = current_user.expires_at if !current_user.expires_at.nil?
       service = client.discovered_api('calendar', 'v3')
+
+      if client.authorization.refresh_token && client.authorization.expired?
+        client.authorization.fetch_access_token!
+        current_user.token = client.authorization.access_token
+        current_user.save
+      end
 
       response = client.execute({
         api_method: service.calendar_list.list,

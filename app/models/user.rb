@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   #       :recoverable, :rememberable, :trackable, :validatable,
   #       :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  devise :database_authenticatable, :rememberable, :omniauthable, :omniauth_providers => [:google_oauth2]
+  devise :timeoutable, :database_authenticatable, :rememberable, :omniauthable, :omniauth_providers => [:google_oauth2]
 
   validates :email, presence: true, uniqueness: true
 
@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
     user.uid = access_token.uid
     user.token = access_token.credentials.token
     user.refresh_token = access_token.credentials.refresh_token
+    user.expires_at = access_token.credentials.expires_at
     user.save
     user
   end
