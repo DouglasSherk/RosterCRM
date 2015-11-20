@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   #       :recoverable, :rememberable, :trackable, :validatable,
   #       :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  devise :timeoutable, :database_authenticatable, :rememberable, :omniauthable, :omniauth_providers => [:google_oauth2]
+  devise :database_authenticatable, :rememberable, :omniauthable, :omniauth_providers => [:google_oauth2]
 
   validates :email, presence: true, uniqueness: true
 
