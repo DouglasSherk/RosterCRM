@@ -20,7 +20,7 @@ class Customer < ActiveRecord::Base
   end
 
   def status
-    status = interactions.max_by(&:mode)
+    status = Interaction.where(customer: self).order('mode DESC').limit(1).first
     ((status && status.mode) || Interaction.modes.first[0]).to_sym
   end
 
