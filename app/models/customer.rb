@@ -15,7 +15,7 @@ class Customer < ActiveRecord::Base
   def active?(user_city_country)
     different_city = !user_city_country.nil? && !user_city_country.empty? &&
                      !city_country.nil? && !city_country.empty? &&
-                     user_city_country == city_country
+                     user_city_country != city_country
     status != :termination && !different_city
   end
 
