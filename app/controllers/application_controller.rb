@@ -14,9 +14,11 @@ class ApplicationController < ActionController::Base
     def maybe_fetch_calendar
       return if current_user.nil? ||
         (!current_user.last_calendar_fetch.nil? &&
-         # XXX/drs: Why?
-         current_user.last_calendar_fetch.is_a?(DateTime) &&
-         DateTime.now - current_user.last_calendar_fetch < 5.minutes)
+         # XXX/drs: Hilariously bad order of operations issue here.
+         # You can't put the `DateTime.now` first or it won't trip whatever
+         # operator is making this happen. So instead, reverse the order and
+         # then invert the result.
+         -1 * (current_user.last_calendar_fetch - DateTime.now) < 5*60)
       fetch_calendar
       current_user.last_calendar_fetch = DateTime.now
       current_user.save
