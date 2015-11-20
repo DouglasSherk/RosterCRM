@@ -80,11 +80,14 @@ class ApplicationController < ActionController::Base
         interaction.save
       end
 
-      # Find all orphaned interactions and delete them.
+      # Find all orphaned interactions and mark them as cancelations.
       interactions = Interaction.where(customer: Customer.where(user: current_user)).where.not(google_calendar_id: nil)
       interactions.each do |inter|
         interaction_event = events.find { |event| event['id'] == inter.google_calendar_id }
-        inter.destroy if interaction_event.nil?
+        if !interaction_event
+          inter.mode = :cancelation
+          inter.save
+        end
       end
     end
 end

@@ -5,10 +5,11 @@ module CustomersHelper
 
   def status_color(status)
     colors = {
-      :communication => 'active',
-      :meeting => 'info',
-      :close => 'success',
-      :termination => 'danger'
+      communication: 'active',
+      meeting: 'info',
+      cancelation: 'warning',
+      close: 'success',
+      termination: 'danger'
     }
     colors[status]
   end
